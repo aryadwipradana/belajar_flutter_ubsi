@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_belajar_app/baris_kolom.dart';
 import 'package:flutter_belajar_app/parsing.dart';
+import 'package:flutter_belajar_app/welcome/welcome_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: const Color.fromARGB(255, 4, 6, 127)),
       ),
-      home: const Parsing(),
+      home: const WelcomePage(),
     );
   }
 }
