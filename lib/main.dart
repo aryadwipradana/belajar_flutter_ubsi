@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_belajar_app/baris_kolom.dart';
 import 'package:flutter_belajar_app/parsing.dart';
+import 'package:flutter_belajar_app/ui/pasien_page.dart';
+import 'package:flutter_belajar_app/ui/poli_page.dart';
 import 'package:flutter_belajar_app/welcome/welcome_page.dart';
 
 void main() {
@@ -31,9 +33,14 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: const Color.fromARGB(255, 4, 6, 127)),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        // Mengatur agar AppBar menggunakan warna utama (primary) dan teks berwarna putih
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.blue,
+          foregroundColor: Colors.white,
+        ),
       ),
-      home: const WelcomePage(),
+      home: PoliPage(),
     );
   }
 }
