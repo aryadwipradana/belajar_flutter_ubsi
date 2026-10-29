@@ -19,23 +19,27 @@ class _PoliPageState extends State<PoliPage> {
         actions: [
           GestureDetector(
             child: const Icon(Icons.add),
-            onTap: () {
-              Navigator.push(
+            onTap: () async {
+              await Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PoliForm()),
+                MaterialPageRoute(builder: (context) => const PoliForm()),
               );
+              setState(() {});
             },
           ),
         ],
       ),
-      body: ListView(
-        children: [
-          PoliItem(poli: Poli(namaPoli: "Poli Anak")),
-          PoliItem(poli: Poli(namaPoli: "Poli Kandungan")),
-          PoliItem(poli: Poli(namaPoli: "Poli Gigi")),
-          PoliItem(poli: Poli(namaPoli: "Poli THT")),
-        ],
-      ),
+      body: Poli.dataPoli.isEmpty
+          ? const Center(child: Text("Belum ada data poli"))
+          : ListView.builder(
+              itemCount: Poli.dataPoli.length,
+              itemBuilder: (context, index) {
+                return PoliItem(
+                  poli: Poli.dataPoli[index],
+                  onRefresh: () => setState(() {}),
+                );
+              },
+            ),
     );
   }
 }

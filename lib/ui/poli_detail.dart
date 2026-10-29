@@ -34,22 +34,23 @@ class _PoliDetailState extends State<PoliDetail> {
     );
   }
 
-  _tombolUbah() {
+  Widget _tombolUbah() {
     return ElevatedButton(
-      onPressed: () {
-        Navigator.push(
+      onPressed: () async {
+        await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => PoliUpdateForm(poli: widget.poli),
           ),
         );
+        setState(() {});
       },
       style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
       child: const Text("Ubah"),
     );
   }
 
-  _tombolHapus() {
+  Widget _tombolHapus() {
     return ElevatedButton(
       onPressed: () {
         AlertDialog alertDialog = AlertDialog(
@@ -58,22 +59,23 @@ class _PoliDetailState extends State<PoliDetail> {
             // tombol ya
             ElevatedButton(
               onPressed: () {
+                Poli.dataPoli.remove(widget.poli);
                 Navigator.pop(context);
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => PoliPage()),
+                  MaterialPageRoute(builder: (context) => const PoliPage()),
                 );
               },
-              child: const Text("YA"),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+              child: const Text("YA"),
             ),
             // tombol batal
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text("Tidak"),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+              child: const Text("Tidak"),
             ),
           ],
         );

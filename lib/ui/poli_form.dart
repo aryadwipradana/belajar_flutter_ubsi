@@ -3,10 +3,10 @@ import '../model/poli.dart';
 import 'poli_detail.dart';
 
 class PoliForm extends StatefulWidget {
-  const PoliForm({Key? key}) : super(key: key);
+  const PoliForm({super.key});
 
   @override
-  _PoliFormState createState() => _PoliFormState();
+  State<PoliForm> createState() => _PoliFormState();
 }
 
 class _PoliFormState extends State<PoliForm> {
@@ -28,17 +28,19 @@ class _PoliFormState extends State<PoliForm> {
     );
   }
 
-  _fieldNamaPoli() {
+  Widget _fieldNamaPoli() {
     return TextField(
       decoration: const InputDecoration(labelText: "Nama Poli"),
       controller: _namaPoliCtrl,
     );
   }
 
-  _tombolSimpan() {
+  Widget _tombolSimpan() {
     return ElevatedButton(
       onPressed: () {
-        Poli poli = new Poli(namaPoli: _namaPoliCtrl.text);
+        if (_namaPoliCtrl.text.trim().isEmpty) return;
+        Poli poli = Poli(namaPoli: _namaPoliCtrl.text.trim());
+        Poli.dataPoli.add(poli);
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => PoliDetail(poli: poli)),

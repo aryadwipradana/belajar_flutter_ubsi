@@ -5,10 +5,10 @@ import 'poli_detail.dart';
 class PoliUpdateForm extends StatefulWidget {
   final Poli poli;
 
-  const PoliUpdateForm({Key? key, required this.poli}) : super(key: key);
+  const PoliUpdateForm({super.key, required this.poli});
 
   @override
-  _PoliUpdateFormState createState() => _PoliUpdateFormState();
+  State<PoliUpdateForm> createState() => _PoliUpdateFormState();
 }
 
 class _PoliUpdateFormState extends State<PoliUpdateForm> {
@@ -38,21 +38,22 @@ class _PoliUpdateFormState extends State<PoliUpdateForm> {
     );
   }
 
-  _fieldNamaPoli() {
+  Widget _fieldNamaPoli() {
     return TextField(
       decoration: const InputDecoration(labelText: "Nama Poli"),
       controller: _namaPoliCtrl,
     );
   }
 
-  _tombolSimpan() {
+  Widget _tombolSimpan() {
     return ElevatedButton(
       onPressed: () {
-        Poli poli = new Poli(namaPoli: _namaPoliCtrl.text);
+        if (_namaPoliCtrl.text.trim().isEmpty) return;
+        widget.poli.namaPoli = _namaPoliCtrl.text.trim();
         Navigator.pop(context);
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => PoliDetail(poli: poli)),
+          MaterialPageRoute(builder: (context) => PoliDetail(poli: widget.poli)),
         );
       },
       child: const Text("Simpan Perubahan"),
